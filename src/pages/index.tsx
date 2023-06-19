@@ -1,7 +1,39 @@
 import { type NextPage } from "next";
 import Head from "next/head";
+import Benefit from "~/components/home/Benefit";
 import Header from "~/components/home/Header";
 import Navbar from "~/components/home/Navbar";
+
+import benefitOneImg from "public/img/benefit-one.png";
+
+import {
+  FaceSmileIcon,
+  ChartBarSquareIcon,
+  CursorArrowRaysIcon,
+} from "@heroicons/react/24/outline";
+
+const devBenefits = {
+  title: "Unlock the Benefits for Developers",
+  desc: "Streamline your job search with our platform. Get personalized tech stack recommendations, find the perfect job faster, and stay connected with recruiters effortlessly. Maximize your opportunities and take your career to new heights today.  ",
+  image: benefitOneImg,
+  bullets: [
+    {
+      title: "Seamless Job Matching",
+      desc: "Discover job opportunities that perfectly match your skills and preferences",
+      icon: () => <FaceSmileIcon />,
+    },
+    {
+      title: "Personalized Tech Stack Recommendations",
+      desc: "Receive tailored recommendations based on your tech stack",
+      icon: () => <ChartBarSquareIcon />,
+    },
+    {
+      title: "Fast and Efficient Hiring Process",
+      desc: "Experience a streamlined hiring process",
+      icon: () => <CursorArrowRaysIcon />,
+    },
+  ],
+};
 
 const Home: NextPage = () => {
   return (
@@ -13,6 +45,16 @@ const Home: NextPage = () => {
       </Head>
       <Navbar />
       <Header />
+      <div className="main-container mt-4 flex w-full flex-col items-center justify-center text-center">
+        <div className="text-sm font-bold uppercase tracking-wider text-indigo-600">
+          For Developers
+        </div>
+        <h2 className="mt-3 max-w-2xl text-3xl font-bold leading-snug tracking-tight text-gray-800 dark:text-white lg:text-4xl lg:leading-tight">
+          Why should you use Lokerdeveloper
+        </h2>
+        <p className="max-w-2xl py-4 text-lg leading-normal text-gray-500 dark:text-gray-300 lg:text-xl xl:text-xl"></p>
+      </div>
+      <Benefit {...devBenefits} />
     </>
   );
 };
