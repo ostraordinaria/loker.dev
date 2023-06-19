@@ -8,12 +8,15 @@ const Header = () => {
       <div className="flex w-full items-center lg:w-1/2">
         <div className="mb-8 max-w-2xl">
           <h1 className="text-4xl font-bold leading-snug tracking-tight text-gray-800 dark:text-white lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight">
-            Discover Your Next Job in Seconds: Fast, Personalized, and
-            Hassle-Free
+            Smart matching for
+            <span className="text-indigo-600"> developers </span>and
+            <span className="text-indigo-600"> recruiters</span>
           </h1>
           <p className="py-5 text-xl leading-normal text-gray-500 dark:text-gray-300 lg:text-xl xl:text-2xl">
-            Say goodbye to tedious job searches and hello to a game-changing
-            platform that matches you with your dream job instantly
+            Through our innovative approach, we aim to simplify and optimize the
+            entire job-seeking process, fostering meaningful connections between
+            developers and recruiters while facilitating efficient and effective
+            talent acquisition
           </p>
 
           <div className="flex flex-col items-start space-x-3 space-y-3 sm:flex-row sm:items-center sm:space-y-0">
