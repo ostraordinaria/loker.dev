@@ -12,6 +12,7 @@ import {
   ChartBarSquareIcon,
   CursorArrowRaysIcon,
 } from "@heroicons/react/24/outline";
+import FAQ from "~/components/home/FAQ";
 
 const devBenefits = {
   title: "Unlock the Benefits for Developers",
@@ -83,6 +84,7 @@ const Home: NextPage = () => {
         For Recruiters
       </div>
       <Benefit rtl {...recruiterBenefits} />
+      <FAQ />
     </>
   );
 };
