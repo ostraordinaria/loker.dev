@@ -4,7 +4,7 @@ import heroImage from "public/img/hero.png";
 
 const Header = () => {
   return (
-    <div className="container mx-auto flex flex-wrap p-8 xl:px-0">
+    <div className="main-container">
       <div className="flex w-full items-center lg:w-1/2">
         <div className="mb-8 max-w-2xl">
           <h1 className="text-4xl font-bold leading-snug tracking-tight text-gray-800 dark:text-white lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight">

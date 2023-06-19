@@ -8,7 +8,7 @@ const Navbar = () => {
 
   return (
     <div className="w-full">
-      <nav className="container relative mx-auto flex flex-wrap items-center justify-between p-8 lg:justify-between xl:px-0">
+      <nav className="main-container relative items-center justify-between lg:justify-between">
         {/* Logo  */}
         <Disclosure>
           {({ open }) => (
@@ -95,7 +95,6 @@ const Navbar = () => {
           >
             {sessionData ? "Sign Out" : "Sign In"}
           </button>
-
         </div>
       </nav>
     </div>
