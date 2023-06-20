@@ -13,6 +13,7 @@ import {
   CursorArrowRaysIcon,
 } from "@heroicons/react/24/outline";
 import FAQ from "~/components/home/FAQ";
+import Footer from "~/components/home/Footer";
 
 const devBenefits = {
   title: "Unlock the Benefits for Developers",
@@ -85,6 +86,7 @@ const Home: NextPage = () => {
       </div>
       <Benefit rtl {...recruiterBenefits} />
       <FAQ />
+      <Footer />
     </>
   );
 };
