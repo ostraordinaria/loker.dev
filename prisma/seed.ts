@@ -4,6 +4,7 @@ async function seed() {
   try {
     await prisma.location.createMany({
       data: [
+        { remote: true, city: "", province: "" },
         { city: "Banda Aceh", province: "Aceh" },
         { city: "Langsa", province: "Aceh" },
         { city: "Lhokseumawe", province: "Aceh" },

@@ -68,8 +68,9 @@ model VerificationToken {
 
 model Location {
   id        String   @id @default(cuid())
-  city      String
-  province  String
+  remote    Boolean @default(false)
+  city      String?
+  province  String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
