@@ -67,7 +67,8 @@ const recruiterBenefits = {
 
 const Home: NextPage = () => {
   const { status } = useSession();
-  const Wrapper = status === "unauthenticated" ? React.Fragment : Authenticated;
+  // const Wrapper = status === "unauthenticated" ? React.Fragment : Authenticated;
+  const Wrapper = React.Fragment;
 
   return (
     <Wrapper>

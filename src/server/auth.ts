@@ -39,17 +39,17 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    session: async ({ session, user }) => {
-      const isProfileExist = await prisma.profile.count({
-        where: { userId: user.id },
-      });
+    session: ({ session, user }) => {
+      // const isProfileExist = await prisma.profile.count({
+      //   where: { userId: user.id },
+      // });
 
       return {
         ...session,
         user: {
           ...session.user,
           id: user.id,
-          haveProfile: Boolean(isProfileExist),
+          // haveProfile: Boolean(isProfileExist),
         },
       };
     },
