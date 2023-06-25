@@ -20,7 +20,6 @@ declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
       id: string;
-      haveProfile: boolean;
       // ...other properties
       // role: UserRole;
     } & DefaultSession["user"];
@@ -40,16 +39,11 @@ declare module "next-auth" {
 export const authOptions: NextAuthOptions = {
   callbacks: {
     session: ({ session, user }) => {
-      // const isProfileExist = await prisma.profile.count({
-      //   where: { userId: user.id },
-      // });
-
       return {
         ...session,
         user: {
           ...session.user,
           id: user.id,
-          // haveProfile: Boolean(isProfileExist),
         },
       };
     },
