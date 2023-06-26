@@ -12,9 +12,6 @@ const Authenticated = ({ children }: { children: ReactNode }) => {
     if (!session?.user || status !== "authenticated") {
       return router.push("/");
     }
-    if (!session.user.haveProfile && pathname !== "/profile") {
-      return router.push("/profile");
-    }
   }, [session, status, router, pathname]);
 
   if (status === "loading") {
