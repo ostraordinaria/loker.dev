@@ -6,10 +6,11 @@ const ProfileCompletion = () => {
   const { data: sessionData } = useSession();
   if (!sessionData) return;
 
-  const { data: profile } = api.profile.getById.useQuery(
+  const { data: profile, isLoading } = api.profile.getById.useQuery(
     { userId: sessionData.user.id },
     { enabled: sessionData?.user !== undefined }
   );
+  if (isLoading) return;
   if (!profile) {
     return (
       <div className="main-container flex flex-col">
@@ -30,8 +31,13 @@ const ProfileCompletion = () => {
 
           <span>Please complete your profile to access more features</span>
           <div>
-            <Link href="/profile/create" className="btn-primary btn">
-              Complete profile
+            <Link href="/profile/developer" className="btn-primary btn">
+              I am a developer
+            </Link>
+          </div>
+          <div>
+            <Link href="/profile/recruiter" className="btn-primary btn">
+              I am a recruiter
             </Link>
           </div>
         </div>
