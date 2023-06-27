@@ -33,15 +33,16 @@ model Account {
 }
 
 model DeveloperProfile {
-  id              String    @id @default(cuid())
+  id              String                @id @default(cuid())
   profileId       String
-  profile         Profile   @relation(fields: [profileId], references: [id])
-  bio             String    @db.Text
+  profile         Profile               @relation(fields: [profileId], references: [id])
+  bio             String                @db.Text
   education       String?
   repoUrl         String?
   personalSiteUrl String?
   locationId      String?
-  location        Location? @relation(fields: [locationId], references: [id])
+  availability    DeveloperAvailability @default(ACTIVELY_LOOKING)
+  location        Location?             @relation(fields: [locationId], references: [id])
   projects        Project[]
 
   @@unique([profileId])
@@ -133,4 +134,10 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+enum DeveloperAvailability {
+  ACTIVELY_LOOKING
+  CASUALLY_LOOKING
+  NOT_OPEN
 }
