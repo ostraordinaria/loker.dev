@@ -40,10 +40,13 @@ model DeveloperProfile {
   education       String?
   repoUrl         String?
   personalSiteUrl String?
+  locationId      String?
+  location        Location? @relation(fields: [locationId], references: [id])
   projects        Project[]
 
   @@unique([profileId])
   @@index([profileId])
+  @@index([locationId])
 }
 
 model Example {
@@ -53,12 +56,14 @@ model Example {
 }
 
 model Location {
-  id        String   @id @default(cuid())
-  remote    Boolean  @default(false)
-  city      String?
-  province  String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id               String             @id @default(cuid())
+  remote           Boolean            @default(false)
+  city             String?
+  province         String?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  developerProfile DeveloperProfile[]
+  recruiterProfile RecruiterProfile[]
 }
 
 model Profile {
@@ -84,19 +89,21 @@ model Project {
 }
 
 model RecruiterProfile {
-  id              String  @id @default(cuid())
+  id              String    @id @default(cuid())
   profileId       String
-  profile         Profile @relation(fields: [profileId], references: [id])
+  profile         Profile   @relation(fields: [profileId], references: [id])
   contact         String
   companyName     String
   companySize     String
   companyIndustry String
-  location        String
   website         String
   bio             String
+  location        Location? @relation(fields: [locationId], references: [id])
+  locationId      String?
 
   @@unique([profileId])
   @@index([profileId])
+  @@index([locationId])
 }
 
 model Session {
