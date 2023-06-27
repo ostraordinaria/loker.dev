@@ -1,6 +1,7 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { developerProfileSchema } from "~/pages/profile/developer";
+import { recruiterProfileSchema } from "~/pages/profile/recruiter";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 
 export const profileRouter = createTRPCRouter({
@@ -46,6 +47,52 @@ export const profileRouter = createTRPCRouter({
               repoUrl,
               locationId: location,
               availability,
+            },
+          },
+        },
+      });
+
+      return profile;
+    }),
+
+  registerRecruiter: protectedProcedure
+    .input(recruiterProfileSchema)
+    .mutation(async ({ ctx, input }) => {
+      const {
+        companyIndustry,
+        companyName,
+        companySize,
+        contact,
+        website,
+        location,
+        name,
+        bio,
+      } = input;
+
+      const isProfileExist = await ctx.prisma.profile.findFirst({
+        where: { userId: ctx.session.user.id },
+      });
+
+      if (isProfileExist) {
+        throw new TRPCError({
+          code: "UNPROCESSABLE_CONTENT",
+          message: "Profile exist",
+        });
+      }
+
+      const profile = await ctx.prisma.profile.create({
+        data: {
+          userId: ctx.session.user.id,
+          name,
+          recruiterProfile: {
+            create: {
+              bio,
+              companyIndustry,
+              companyName,
+              companySize,
+              contact,
+              website,
+              locationId: location,
             },
           },
         },
