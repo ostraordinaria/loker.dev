@@ -32,6 +32,20 @@ model Account {
   @@index([userId])
 }
 
+model DeveloperProfile {
+  id              String    @id @default(cuid())
+  profileId       String
+  profile         Profile   @relation(fields: [profileId], references: [id])
+  bio             String    @db.Text
+  education       String?
+  repoUrl         String?
+  personalSiteUrl String?
+  projects        Project[]
+
+  @@unique([profileId])
+  @@index([profileId])
+}
+
 model Example {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
@@ -45,6 +59,44 @@ model Location {
   province  String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Profile {
+  id               String            @id @default(cuid())
+  user             User              @relation(fields: [userId], references: [id])
+  userId           String            @unique
+  name             String
+  developerProfile DeveloperProfile?
+  recruiterProfile RecruiterProfile?
+
+  @@index([userId])
+}
+
+model Project {
+  id                String           @id @default(cuid())
+  name              String
+  developerId       String
+  developerProfiles DeveloperProfile @relation(fields: [developerId], references: [id])
+  summary           String           @db.Text
+  url               String
+
+  @@index([developerId])
+}
+
+model RecruiterProfile {
+  id              String  @id @default(cuid())
+  profileId       String
+  profile         Profile @relation(fields: [profileId], references: [id])
+  contact         String
+  companyName     String
+  companySize     String
+  companyIndustry String
+  location        String
+  website         String
+  bio             String
+
+  @@unique([profileId])
+  @@index([profileId])
 }
 
 model Session {
@@ -65,6 +117,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  profile       Profile?
 }
 
 model VerificationToken {
