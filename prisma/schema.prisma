@@ -36,7 +36,7 @@ model DeveloperProfile {
   id              String                @id @default(cuid())
   profileId       String
   profile         Profile               @relation(fields: [profileId], references: [id])
-  bio             String                @db.Text
+  bio             String?                @db.Text
   education       String?
   repoUrl         String?
   personalSiteUrl String?
