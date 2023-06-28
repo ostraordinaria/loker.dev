@@ -1,10 +1,13 @@
 import Link from "next/link";
 import { Disclosure } from "@headlessui/react";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { api } from "~/utils/api";
 
 const Navbar = () => {
   const navigation: string[] = [];
   const { data: sessionData } = useSession();
+
+  const { data: isProfileExist } = api.profile.isProfileExist.useQuery();
 
   return (
     <div className="w-full">
@@ -57,6 +60,14 @@ const Navbar = () => {
                         {item}
                       </Link>
                     ))}
+                    {isProfileExist && (
+                      <Link
+                        href="/profile"
+                        className="dark:focus:bg-trueGray-700 -ml-4 w-full rounded-md px-4 py-2 text-gray-500 hover:text-indigo-500 focus:bg-indigo-100 focus:text-indigo-500 focus:outline-none dark:text-gray-300"
+                      >
+                        Profile
+                      </Link>
+                    )}
                     <button
                       className="mt-3 w-full rounded-md bg-indigo-600 px-6 py-2 text-center text-white lg:ml-5"
                       onClick={
@@ -88,7 +99,13 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <div className="nav__item mr-3 hidden space-x-3 lg:flex">
+        <div className="nav__item mr-3 hidden space-x-3 lg:flex lg:items-center lg:justify-center">
+          {isProfileExist && (
+            <Link href={"/profile"} className="link ">
+              Profile
+            </Link>
+          )}
+
           <button
             className="rounded-md bg-indigo-600 px-6 py-2 text-white md:ml-5"
             onClick={sessionData ? () => void signOut() : () => void signIn()}
