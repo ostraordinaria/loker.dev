@@ -1,17 +1,10 @@
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { api } from "~/utils/api";
 
 const ProfileCompletion = () => {
-  const { data: sessionData } = useSession();
-  if (!sessionData) return;
-
-  const { data: profile, isLoading } = api.profile.getById.useQuery(
-    { userId: sessionData.user.id },
-    { enabled: sessionData?.user !== undefined }
-  );
+  const { data: isProfileExist, isLoading } = api.profile.isProfileExist.useQuery();
   if (isLoading) return;
-  if (!profile) {
+  if (!isProfileExist) {
     return (
       <div className="main-container flex flex-col">
         <div className="alert alert-info">
