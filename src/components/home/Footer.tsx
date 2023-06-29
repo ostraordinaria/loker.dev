@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <div className="relative">
       <div className="main-container">
-        <div className="dark:border-trueGray-700 mx-auto mt-5 grid max-w-screen-xl grid-cols-1 gap-10 border-t border-gray-100 pt-10 lg:grid-cols-5">
+        <div className="dark:border-trueGray-700 mt-5 grid w-full max-w-screen-2xl grid-cols-1 gap-10 border-t border-gray-100 pt-10 lg:grid-cols-5">
           <div className="lg:col-span-2">
             <div>
               <Link
