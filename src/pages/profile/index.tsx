@@ -12,8 +12,11 @@ import { recruiterProfileSchema } from "./recruiter";
 
 const ProfilePage = () => {
   const router = useRouter();
-  const { data: profile, isLoading: fetchingProfile } =
-    api.profile.getProfile.useQuery();
+  const {
+    data: profile,
+    isLoading: fetchingProfile,
+    refetch,
+  } = api.profile.getProfile.useQuery();
   const { data: locations, isLoading: fetchingLocations } =
     api.location.getAll.useQuery();
 
@@ -27,9 +30,9 @@ const ProfilePage = () => {
   const DeveloperProfile = () => {
     const { mutate, isLoading: isSubmitting } =
       api.profile.updateDeveloper.useMutation({
-        onSuccess: () => {
+        onSuccess: async () => {
           toast.success("Profile updated");
-          router.push("/profile");
+          await refetch();
         },
         onError: (e) => {
           if (e.message) {
@@ -84,9 +87,9 @@ const ProfilePage = () => {
   const RecruiterProfile = () => {
     const { mutate, isLoading: isSubmitting } =
       api.profile.updateRecruiter.useMutation({
-        onSuccess: () => {
+        onSuccess: async () => {
           toast.success("Profile updated");
-          router.push("/profile");
+          await refetch();
         },
         onError: (e) => {
           if (e.message) {
